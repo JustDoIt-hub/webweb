@@ -392,11 +392,33 @@
     <audio id="bgmMusic" src="http://www.51mp3ring.com/51mp3ring_com2/at200611121582079026.mp3" preload="auto" type="audio/mp3" autoplay loop></audio>
     <!--coded by koma-->
     <!--LIVEDEMO_00 -->
-    <audio id="bgMusic" autoplay loop>
-        <source src="images/audio123.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-      
+   <audio id="bgMusic" autoplay hidden></audio>
+
+<script>
+    const playlist = [
+        "images/audio1.mp3",
+        "images/audio3.mp3",
+        "images/audio2.mp3"
+    ];
+
+    let currentTrack = 0;
+    const player = document.getElementById("bgMusic");
+
+    function playTrack(index) {
+        player.src = playlist[index];
+        player.play();
+    }
+
+    player.addEventListener("ended", () => {
+        currentTrack = (currentTrack + 1) % playlist.length;
+        playTrack(currentTrack);
+    });
+
+    // Start playing the first track
+    playTrack(currentTrack);
+</script>
+
+                        
       <script>
         // Ensure it plays after user interaction (due to autoplay restrictions)
         window.addEventListener('click', function () {
